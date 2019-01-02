@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <title>My Todo</title>
+
+    <link href="styles/jquery-ui.min.css" rel="stylesheet" />
+    <link href="styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="styles/app.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">My Todo</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">Page 1</a></li>
+                    <li><a href="#">Page 2</a></li>
+                    <li><a href="#">Page 3</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col-md-8" id="todoListView">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">ToDo List</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Completed</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Due Date</th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: todoItems">
+                                <tr data-bind="css: { danger: isLate, success: done }">
+                                    <td>
+                                        <input type="checkbox" data-bind="checked: done">
+                                    </td>
+                                    <td data-bind="text: title, css: { ticketDone: done }"></td>
+                                    <td data-bind="text: description, css: { ticketDone: done }"></td>
+                                    <td data-bind="text: formattedDueDate, css: { ticketDone: done }"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" id="newItemView">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">New ToDo Item</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div role="form">
+                            <div class="form-group">
+                                <label for="todoItemTitle">Title</label>
+                                <input type="text" class="form-control" id="todoItemTitle" placeholder="Enter Title" data-bind="value: title, valueUpdate: 'input'">
+                            </div>
+                            <div class="form-group">
+                                <label for="todoItemDescription">Description</label>
+                                <textarea class="form-control" rows="3" id="todoItemDescription" placeholder="Enter Description" data-bind="value: description, valueUpdate: 'input'"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="todoItemDueDate">Due Date</label>
+                                <input type="text" class="form-control" id="todoItemDueDate" placeholder="Enter Due Date" data-bind="value: dueDate">
+                            </div>
+                            <button type="button" class="btn btn-primary" data-bind="click: insertNewTodoItem, enable: canInsertNewTicket">
+                                <span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Insert Item
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- javascript 3rd parties libraries script references -->
+    <script type="text/javascript" src="scripts/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/libs/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
+    <script type="text/javascript" src="scripts/libs/postal.min.js"></script>
+    <script type="text/javascript" src="scripts/libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="scripts/libs/knockout-latest.js"></script>
+
+    <!-- javascript source script references -->
+    <!--<script type="text/javascript" src="scripts/src/EventBus.js"></script>
+    <script type="text/javascript" src="scripts/src/MyTodoService.js"></script>
+    <script type="text/javascript" src="scripts/src/TodoItem.js"></script>
+    <script type="text/javascript" src="scripts/src/TodoListViewModel.js"></script>
+    <script type="text/javascript" src="scripts/src/NewTodoItemViewModel.js"></script>
+    <script type="text/javascript" src="scripts/src/TodoListView.js"></script>
+    <script type="text/javascript" src="scripts/src/NewTodoItemView.js"></script>
+    <script type="text/javascript" src="scripts/src/MyTodoView.js"></script>-->
+    <script type="text/javascript" src="scripts/dist/mytodo.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            var myTodoView = new mytodo.MyTodoView();
+
+            myTodoView.init();
+        });
+    </script>
+</body>
+</html>
